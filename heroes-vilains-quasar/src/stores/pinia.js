@@ -1,5 +1,7 @@
-import {defineStore} from 'pinia';
-
+import { defineStore } from 'pinia';
+import { useErrorStore } from './error';
+import { useAuthStore } from './secret';
+import { useUserStore } from './user';
 import {
   addTeam,
   createOrganisation,
@@ -20,10 +22,6 @@ import {
   updateHero
 } from "../services/hero.service";
 
-import error from './error';
-import secret from './secret';
-import user from './user';
-
 export const useMyStore = defineStore({
   id: 'myStore',
   state: () => ({
@@ -32,7 +30,12 @@ export const useMyStore = defineStore({
     currentOrganisation: null,
     listHeroAlias: [],
     listTeam: [],
-    listOrganisations: []
+    listOrganisations: [],
+    error: {
+      showErrorDialogue: false,
+      errorTitle: 'Titre',
+      errorDescr: 'Descr'
+    }
   }),
 
   mutations: {
@@ -69,7 +72,7 @@ export const useMyStore = defineStore({
     },
 
     updateErrorDescr(state, descr) {
-      state.errorDescr = descr;
+      state.error.errorDescr = descr;
     }
   },
 
@@ -167,8 +170,8 @@ export const useMyStore = defineStore({
   },
 
   modules: {
-    error,
-    secret,
-    user
+    error: useErrorStore(),
+    secret: useAuthStore(),
+    user: useUserStore()
   }
 });

@@ -36,8 +36,6 @@ export const useUserStore = defineStore({
       let answer = await signin(state.username, state.passwordUser);
       if (answer.error !== 0) {
         commit('updateAuthUser', false);
-        // Note: Les mutations `updateShowErrorDialogue`, `updateErrorTitle`, et `updateErrorDescr`
-        // ne sont pas définies dans ce store Pinia. Assurez-vous de les gérer correctement dans votre composant ou dans un autre store Pinia si nécessaire.
       } else {
         commit('updateAuthUser', true);
         localStorage.setItem('xsrfToken', answer.data.xsrfToken);

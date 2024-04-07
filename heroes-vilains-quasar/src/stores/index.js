@@ -1,14 +1,7 @@
-import {store} from 'quasar/wrappers';
-import {createPinia} from 'pinia';
-import {useMyStore} from './pinia';
+import { store } from 'quasar/wrappers';
+import { createPinia } from 'pinia';
 
-export default store((/* { ssrContext } */) => {
+export default store(() => {
   const pinia = createPinia();
-
-  // Vous pouvez ajouter des plugins Pinia ici
-  // pinia.use(SomePiniaPlugin)
-
   return pinia;
 });
-
-export {useMyStore};
